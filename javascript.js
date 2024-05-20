@@ -55,10 +55,13 @@ let humanScore = 0;
 let computerScore = 0;
 const results = document.createElement("div")
 gamePlay.appendChild(results)
+results.textContent = "Who will be victorious?!"
 const scores = document.createElement("div")
 scores.textContent = "Current scores - Player: " + humanScore + " Computer: " + computerScore;
 gamePlay.appendChild(scores)
 const gameOver = document.createElement("h2")
+
+// increases scores as each round is played 
 function playGame() {
     if (humanScore >= 5 || computerScore >= 5) {}
     else if (humanScore < 5 && computerScore < 5) {
