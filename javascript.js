@@ -51,29 +51,37 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-// loop the playRound function until either score reaches 5
-
 let humanScore = 0;
 let computerScore = 0;
 const results = document.createElement("div")
 gamePlay.appendChild(results)
+const scores = document.createElement("div")
+scores.textContent = "Current scores - Player: " + humanScore + " Computer: " + computerScore;
+gamePlay.appendChild(scores)
+const gameOver = document.createElement("h2")
 function playGame() {
-    if (humanScore >= 5 || computerScore >=5) {
-        console.log("Game is Over!")
+    if (humanScore >= 5 || computerScore >= 5) {}
+    else if (humanScore < 5 && computerScore < 5) {
+        let result = playRound(humanChoice, getComputerChoice());
+        if (result.includes("win")) {
+            humanScore++;
+        } else if (result.includes("lose")) {
+            computerScore++;
+        }
 
-    } 
-
-    let result = playRound(humanChoice, getComputerChoice());
-    if (result.includes("win")) {
-        humanScore++;
-    } else if (result.includes("lose")) {
-        computerScore++;
+        const roundWinner = document.createElement("p")
+        roundWinner.textContent = result;
+        results.replaceChildren(roundWinner)
+        scores.textContent = "Current scores - Player: " + humanScore + " Computer: " + computerScore;
+        if (humanScore >= 5 || computerScore >= 5) {
+            if (humanScore > computerScore) {
+                gameOver.textContent = "Game over! You win!"
+                gamePlay.appendChild(gameOver);
+            }
+            else if (humanScore < computerScore) {
+                gameOver.textContent = "Game over! You lose!"
+                gamePlay.appendChild(gameOver);
+            }
+        }
     }
-
-    const roundWinner = document.createElement("p")
-    roundWinner.textContent = result;
-    results.replaceChildren(roundWinner)
-    console.log("Your Score: " + humanScore);
-    console.log("Computer's Score: " + computerScore);
-    }  
-
+}
